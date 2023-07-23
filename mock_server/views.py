@@ -9,14 +9,14 @@ logger = get_logger(__name__)
 
 
 def get_all_responses(request):
-    posts = Response.objects.get_all_objects()
-    data = parse_all_responses_data(posts)
+    responses = Response.objects.get_all_objects()
+    data = parse_all_responses_data(responses)
     logger.debug({"data": data})
-    return JsonResponse(data)
+    return JsonResponse(data, safe=False)
 
 
-def get_single_response(request, response_id):
-    response_obj = Response.objects.get_object(response_id=response_id)
-    data = parse_single_response_data(response_obj)
+def get_single_response(request, id):
+    response_obj = Response.objects.get_object(id=id)
+    data = parse_single_response_data(obj=response_obj)
     logger.debug({"data": data})
     return JsonResponse(data)
