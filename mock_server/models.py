@@ -7,16 +7,16 @@ logger = get_logger(__name__)
 
 
 class ResponseManager(models.Manager):
-    def get_object(self, response_id):
+    def get_object(self, id):
         try:
-            return self.get(id=response_id)
+            return self.get(id=id)
 
         except ObjectDoesNotExist as e:
-            logger.debug({"payload": response_id, "db_exception_error": repr(e)})
+            logger.debug({"payload": id, "db_exception_error": repr(e)})
             return False
 
         except Exception as e:
-            logger.debug({"payload": response_id, "db_exception_error": repr(e)})
+            logger.debug({"payload": id, "db_exception_error": repr(e)})
             return None
 
     def get_all_objects(self):
