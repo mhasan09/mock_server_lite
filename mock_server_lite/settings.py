@@ -13,7 +13,6 @@ env = environ.Env(
 # reading .env file
 env_file_path = os.path.join(os.getenv("ENV_FILE_PATH", BASE_DIR), '.env')
 environ.Env.read_env(env_file_path)
-
 SECRET_KEY = env("SECRET_KEY")
 DEBUG = env.bool("DEBUG")
 ALLOWED_HOSTS = env.list("ALLOWED_HOSTS")
@@ -65,9 +64,17 @@ WSGI_APPLICATION = 'mock_server_lite.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': env.str('POSTGRES_DB_NAME'),
+        'USER': env.str('POSTGRES_DB_USER'),
+        'PASSWORD': env.str('POSTGRES_DB_PASSWORD'),
+        'HOST': env.str('POSTGRES_DB_HOST'),
+        'PORT': env.str('POSTGRES_DB_PORT'),
+        'OPTIONS': env.dict('POSTGRES_DB_OPTIONS'),
+        'TEST': {
+            'NAME': env.str('POSTGRES_DB_TEST_NAME'),
+        }
+    },
 }
 
 # Password validation
@@ -92,12 +99,11 @@ AUTH_PASSWORD_VALIDATORS = [
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
 LANGUAGE_CODE = 'en-us'
-
-TIME_ZONE = 'UTC'
-
+DEFAULT_CURRENCY = 'BDT'
+TIME_ZONE = 'Asia/Dhaka'
 USE_I18N = True
-
-USE_TZ = True
+USE_L10N = True
+USE_TZ = False
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
@@ -143,3 +149,28 @@ LOGGING = {
         },
     },
 }
+
+# CORS CONFIG #
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_METHODS = (
+    'GET',
+    'POST',
+    'PUT',
+    'DELETE',
+    'OPTIONS',
+    'PATCH',
+)
+
+CORS_ALLOW_HEADERS = [
+    'accept',
+    'accept-encoding',
+    'authorization',
+    'content-type',
+    'contenttype',
+    'dnt',
+    'origin',
+    'user-agent',
+    'x-csrftoken',
+    'x-requested-with',
+]
+# CORS CONFIG END #
