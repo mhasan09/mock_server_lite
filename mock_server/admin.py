@@ -1,3 +1,11 @@
 from django.contrib import admin
+from mock_server.models import Response
 
-# Register your models here.
+
+@admin.register(Response)
+class CategoryListAdmin(admin.ModelAdmin):
+    list_display = (
+        "title",
+        "content",
+        "created_at",
+    )
