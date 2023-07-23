@@ -1,3 +1,4 @@
+import json
 import logging
 from django.conf import settings
 
@@ -9,19 +10,19 @@ def get_logger(name):
 def parse_all_responses_data(data):
     return [
         {
-            "id": post.get("id"),
-            "title": post.get("title"),
-            "content": post.get("content"),
-            "created_at": post.get("created_at"),
+            "id": item.id,
+            "title": item.title,
+            "content": json.loads(item.content),
+            "created_at": item.created_at.strftime("%Y-%m-%d %H:%M:%S.%f"),
         }
-        for post in data.get("posts", [])
+        for item in data
     ]
 
 
-def parse_single_response_data(data):
+def parse_single_response_data(obj):
     return {
-        "id": data.get("id"),
-        "title": data.get("title"),
-        "content": data.get("content"),
-        "created_at": data.get("created_at"),
-    }
+            "id": obj.id,
+            "title": obj.title,
+            "content": json.loads(obj.content),
+            "created_at": obj.created_at.strftime("%Y-%m-%d %H:%M:%S.%f"),
+        }
