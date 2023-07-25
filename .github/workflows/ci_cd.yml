@@ -2,6 +2,8 @@ name: Django Unit Test
 
 on:
   pull_request:
+    types:
+      - closed
     branches:
       - master
 
@@ -52,7 +54,7 @@ jobs:
   build-and-push:
     runs-on: ubuntu-latest
 
-    if: github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged == true
+    if: github.event.pull_request.merged == true && github.event.pull_request.base.ref == 'master'
 
     steps:
       - name: Checkout code
