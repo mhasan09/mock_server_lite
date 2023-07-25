@@ -1,9 +1,9 @@
 name: CI/CD
 
 on:
-  pull_request:
-    branches:
-      - master
+#  pull_request:
+#    branches:
+#      - master
   push:
     branches:
       - master
@@ -27,44 +27,44 @@ jobs:
       - name: Set environment variables
         env:
           SECRET_KEY: ${{ secrets.SECRET_KEY }}
-          ALLOWED_HOSTS: ${{ secrets.ALLOWED_HOSTS }}
-          LOGGER_ROOT_NAME: ${{ secrets.LOGGER_ROOT_NAME }}
-          POSTGRES_DB_NAME: ${{ secrets.POSTGRES_DB_NAME }}
-          POSTGRES_DB_HOST: ${{ secrets.POSTGRES_DB_HOST }}
-          POSTGRES_DB_PORT: ${{ secrets.POSTGRES_DB_PORT }}
-          POSTGRES_DB_PASSWORD: ${{ secrets.POSTGRES_DB_PASSWORD }}
-          POSTGRES_DB_OPTIONS: ${{ secrets.POSTGRES_DB_OPTIONS }}
-          POSTGRES_DB_TEST_NAME: ${{ secrets.POSTGRES_DB_TEST_NAME }}
-          DJANGO_PORT: ${{ secrets.8002 }}
-          POSTGRES_PORT: ${{ secrets.5433 }}
+#          ALLOWED_HOSTS: ${{ secrets.ALLOWED_HOSTS }}
+#          LOGGER_ROOT_NAME: ${{ secrets.LOGGER_ROOT_NAME }}
+#          POSTGRES_DB_NAME: ${{ secrets.POSTGRES_DB_NAME }}
+#          POSTGRES_DB_HOST: ${{ secrets.POSTGRES_DB_HOST }}
+#          POSTGRES_DB_PORT: ${{ secrets.POSTGRES_DB_PORT }}
+#          POSTGRES_DB_PASSWORD: ${{ secrets.POSTGRES_DB_PASSWORD }}
+#          POSTGRES_DB_OPTIONS: ${{ secrets.POSTGRES_DB_OPTIONS }}
+#          POSTGRES_DB_TEST_NAME: ${{ secrets.POSTGRES_DB_TEST_NAME }}
+#          DJANGO_PORT: ${{ secrets.8002 }}
+#          POSTGRES_PORT: ${{ secrets.5433 }}
 
       - name: Run Django unit tests
         run: python manage.py test
 
-  build-and-push:
-    runs-on: ubuntu-latest
-
-    needs: test
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Set up Python
-        uses: actions/setup-python@v2
-        with:
-          python-version: '3.10'
-
-      - name: Install dependencies
-        run: pip install -r requirements.txt
-
-      - name: Build Docker image
-        run: docker build -t mhasan09/mock_server_lite:latest .
-
-      - name: Log in to Docker Hub
-        run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
-
-      - name: Push Docker image
-        run: docker push mhasan09/mock_server_lite:latest
+#  build-and-push:
+#    runs-on: ubuntu-latest
+#
+#    needs: test
+#
+#    steps:
+#      - name: Checkout code
+#        uses: actions/checkout@v2
+#
+#      - name: Set up Python
+#        uses: actions/setup-python@v2
+#        with:
+#          python-version: '3.10'
+#
+#      - name: Install dependencies
+#        run: pip install -r requirements.txt
+#
+#      - name: Build Docker image
+#        run: docker build -t mhasan09/mock_server_lite:latest .
+#
+#      - name: Log in to Docker Hub
+#        run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+#
+#      - name: Push Docker image
+#        run: docker push mhasan09/mock_server_lite:latest
 
 
