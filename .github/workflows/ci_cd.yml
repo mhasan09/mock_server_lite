@@ -24,21 +24,18 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
-      - name: Set environment variables
+      - name: Set environment variables and run unit tests
         env:
           SECRET_KEY: ${{ secrets.SECRET_KEY }}
-#          ALLOWED_HOSTS: ${{ secrets.ALLOWED_HOSTS }}
-#          LOGGER_ROOT_NAME: ${{ secrets.LOGGER_ROOT_NAME }}
-#          POSTGRES_DB_NAME: ${{ secrets.POSTGRES_DB_NAME }}
-#          POSTGRES_DB_HOST: ${{ secrets.POSTGRES_DB_HOST }}
-#          POSTGRES_DB_PORT: ${{ secrets.POSTGRES_DB_PORT }}
-#          POSTGRES_DB_PASSWORD: ${{ secrets.POSTGRES_DB_PASSWORD }}
-#          POSTGRES_DB_OPTIONS: ${{ secrets.POSTGRES_DB_OPTIONS }}
-#          POSTGRES_DB_TEST_NAME: ${{ secrets.POSTGRES_DB_TEST_NAME }}
-#          DJANGO_PORT: ${{ secrets.8002 }}
-#          POSTGRES_PORT: ${{ secrets.5433 }}
+          ALLOWED_HOSTS: ${{ secrets.ALLOWED_HOSTS }}
+          LOGGER_ROOT_NAME: ${{ secrets.LOGGER_ROOT_NAME }}
+          POSTGRES_DB_NAME: ${{ secrets.POSTGRES_DB_NAME }}
+          POSTGRES_DB_HOST: ${{ secrets.POSTGRES_DB_HOST }}
+          POSTGRES_DB_PORT: ${{ secrets.POSTGRES_DB_PORT }}
+          POSTGRES_DB_PASSWORD: ${{ secrets.POSTGRES_DB_PASSWORD }}
+          POSTGRES_DB_OPTIONS: ${{ secrets.POSTGRES_DB_OPTIONS }}
+          POSTGRES_DB_TEST_NAME: ${{ secrets.POSTGRES_DB_TEST_NAME }}
 
-      - name: Run Django unit tests
         run: python manage.py test
 
   build-and-push:
