@@ -33,6 +33,8 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: Set environment variables
+        env:
+          SECRET_KEY: ${{ secrets.SECRET_KEY }}
         run: |
           echo "export DATABASE_URL=postgres://postgres:13181@localhost:5432/mock_server_lite" >> $GITHUB_ENV
 
