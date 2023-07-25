@@ -41,6 +41,7 @@ jobs:
           echo "POSTGRES_DB_HOST=${{ secrets.POSTGRES_DB_HOST }}" >> $GITHUB_ENV
           echo "POSTGRES_DB_PORT=${{ secrets.POSTGRES_DB_PORT }}" >> $GITHUB_ENV
           echo "POSTGRES_DB_PASSWORD=${{ secrets.POSTGRES_DB_PASSWORD }}" >> $GITHUB_ENV
+          echo "POSTGRES_DB_OPTIONS=${{ secrets.POSTGRES_DB_OPTIONS }}" >> $GITHUB_ENV
           echo "POSTGRES_DB_TEST_NAME=${{ secrets.POSTGRES_DB_TEST_NAME }}" >> $GITHUB_ENV
           echo "export DATABASE_URL=postgres://postgres:13181@localhost:5432/mock_server_lite" >> $GITHUB_ENV
 
