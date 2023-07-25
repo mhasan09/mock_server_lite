@@ -35,6 +35,7 @@ jobs:
       - name: Set environment variables
         run: |
           echo "SECRET_KEY=${{ secrets.SECRET_KEY }}" >> $GITHUB_ENV
+          echo "ALLOWED_HOSTS=${{ secrets.ALLOWED_HOSTS }}" >> $GITHUB_ENV
           echo "export DATABASE_URL=postgres://postgres:13181@localhost:5432/mock_server_lite" >> $GITHUB_ENV
 
       - name: Run Django unit tests
