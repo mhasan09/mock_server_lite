@@ -24,9 +24,9 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
-#      - name: Set environment variables
-#        env:
-#          SECRET_KEY: ${{ secrets.SECRET_KEY }}
+      - name: Set environment variables
+        env:
+          SECRET_KEY: ${{ secrets.SECRET_KEY }}
 #          ALLOWED_HOSTS: ${{ secrets.ALLOWED_HOSTS }}
 #          LOGGER_ROOT_NAME: ${{ secrets.LOGGER_ROOT_NAME }}
 #          POSTGRES_DB_NAME: ${{ secrets.POSTGRES_DB_NAME }}
