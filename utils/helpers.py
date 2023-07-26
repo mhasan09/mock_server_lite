@@ -37,5 +37,5 @@ def parse_single_response_data(obj):
         }
 
     except Exception as e:
-        logger.debug({"error": repr(e)})
+        logger.warning({"error": repr(e)})
         return None
