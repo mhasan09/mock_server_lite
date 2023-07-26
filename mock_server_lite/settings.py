@@ -24,12 +24,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'cid.apps.CidAppConfig',
     'corsheaders',
     'mock_server'
 ]
 
 MIDDLEWARE = [
-    'cid.middleware.CidMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'corsheaders.middleware.CorsMiddleware',
@@ -38,6 +38,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'cid.middleware.CidMiddleware',
+
 ]
 
 ROOT_URLCONF = 'mock_server_lite.urls'
@@ -117,6 +119,12 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGGER_ROOT_NAME = env.str("LOGGER_ROOT_NAME", "mock_server_lite")
 LOG_LEVEL = env.str('LOG_LEVEL', 'DEBUG')
+
+# django-correlation-id config
+CID_GENERATE = True
+CID_HEADER = 'HTTP_X_REQUEST_ID'
+CID_RESPONSE_HEADER = 'X-Request-ID'
+# django-correlation-id config end
 
 LOGGING = {
     'version': 1,
